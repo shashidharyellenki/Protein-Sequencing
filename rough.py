@@ -14,27 +14,27 @@
     #             list_.append(x)
     #             string=""
 
-import json
-def makecodondict(filename):
-    f = open(filename)
-    read = json.load(f)
-    # print(read)
-    d={}
-    for x,y in read.items():
-        # print(y)
-        for i in y:
-            d[i.replace('T','U')]=x
-    print(d)
+# import json
+# def makecodondict(filename):
+#     f = open(filename)
+#     read = json.load(f)
+#     # print(read)
+#     d={}
+#     for x,y in read.items():
+#         # print(y)
+#         for i in y:
+#             d[i.replace('T','U')]=x
+#     print(d)
             
 
 
-print(makecodondict("data/codon_table.json"))
-'''
-{
-    "phe":"TTA",
-    "phe":"TTC"
-}
-'''
+# print(makecodondict("data/codon_table.json"))
+# '''
+# {
+#     "phe":"TTA",
+#     "phe":"TTC"
+# }
+# '''
 
 # def dnaToRna(dna, startIndex):
 #     res=dna[startIndex:]
@@ -56,3 +56,5 @@ print(makecodondict("data/codon_table.json"))
 
 # dna = "ATGGATGGACTCTAACTCATGCCCTTTTAG"
 # print(dnaToRna(dna,0))
+
+
