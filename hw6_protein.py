@@ -97,7 +97,7 @@ Parameters: str ; str
 Returns: 2D list of strs
 '''
 def synthesizeProteins(dnaFilename, codonFilename):
-    reading_file = readFile(dnaFilename) #returs string   m
+    reading_file = readFile(dnaFilename) #returs string
     making_dic = makeCodonDictionary(codonFilename) # returns dict
     i=0
     count=0
@@ -130,7 +130,13 @@ Parameters: 2D list of strs ; 2D list of strs
 Returns: 2D list of strs
 '''
 def commonProteins(proteinList1, proteinList2):
-    return
+    temp=[]
+    for arow in proteinList1:
+        for brow in proteinList2:
+            if arow==brow and arow not in temp:
+                temp.append(arow)
+
+    return temp
 
 
 '''
@@ -263,4 +269,5 @@ if __name__ == "__main__":
     # test.testDnaToRna()4
     # test.testMakeCodonDictionary()
     # test.testGenerateProtein()
-    test.testSynthesizeProteins()
+    # test.testSynthesizeProteins()
+    test.testCommonProteins()
