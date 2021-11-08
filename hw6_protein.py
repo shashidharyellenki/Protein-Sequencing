@@ -97,7 +97,7 @@ Parameters: str ; str
 Returns: 2D list of strs
 '''
 def synthesizeProteins(dnaFilename, codonFilename):
-    reading_file = readFile(dnaFilename) #returs string
+    reading_file = readFile(dnaFilename) #returs string   m
     making_dic = makeCodonDictionary(codonFilename) # returns dict
     i=0
     count=0
