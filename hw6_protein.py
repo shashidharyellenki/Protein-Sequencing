@@ -17,8 +17,12 @@ Parameters: str
 Returns: str
 '''
 def readFile(filename):
-    return
+   open_=open(filename,"r").read().splitlines()
+   string="".join(open_)
+   return string    
+   
 
+# print(readFile("data/human_p53.txt"))
 
 '''
 dnaToRna(dna, startIndex)
@@ -27,6 +31,7 @@ Parameters: str ; int
 Returns: list of strs
 '''
 def dnaToRna(dna, startIndex):
+
     return
 
 
@@ -186,10 +191,10 @@ def runFullProgram():
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
-    test.week1Tests()
-    print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
-    runWeek1()
+    # print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
+    # test.week1Tests()
+    # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
+    # runWeek1()
 
     ## Uncomment these for Week 2 ##
     """
@@ -206,3 +211,5 @@ if __name__ == "__main__":
     print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
     runFullProgram()
     """
+    test.testReadFile()
+    # test.testDnaToRna()
