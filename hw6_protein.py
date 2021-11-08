@@ -19,9 +19,16 @@ Returns: str
 def readFile(filename):
    open_=open(filename,"r").read().splitlines()
    string="".join(open_)
-   return string    
-   
+   return string  
 
+'''
+other way of writing the above funciton
+open_ = open(filname,"r").read.splitlines()
+string=""
+for i in open_:
+    string+=i
+return string
+'''
 # print(readFile("data/human_p53.txt"))
 
 '''
@@ -33,7 +40,7 @@ Returns: list of strs
 def dnaToRna(dna, startIndex):
     res=dna[startIndex:]
     list_=[]
-    string=""
+    string=""#atgaug
     ignore=["UAG", "UAA","UGA"]
     for letter in range(len(res)):
         if len(string)!=3:
@@ -46,7 +53,6 @@ def dnaToRna(dna, startIndex):
             else:
                 list_.append(x)
                 string=""
-
     return list_
 
 
@@ -58,7 +64,13 @@ Returns: dict mapping strs to strs
 '''
 def makeCodonDictionary(filename):
     import json
-    return
+    f = open(filename)
+    read = json.load(f)
+    d={}
+    for x,y in read.items():
+        for i in y:
+            d[i.replace('T','U')]=x
+    return d
 
 
 '''
@@ -226,5 +238,6 @@ if __name__ == "__main__":
     print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
     runFullProgram()
     """
-    test.testReadFile()
-    # test.testDnaToRna()
+    # test.testReadFile()
+    # test.testDnaToRna()4
+    test.testMakeCodonDictionary()
