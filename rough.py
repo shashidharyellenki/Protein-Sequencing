@@ -57,4 +57,12 @@
 # dna = "ATGGATGGACTCTAACTCATGCCCTTTTAG"
 # print(dnaToRna(dna,0))
 
-
+from itertools import zip_longest
+dict1, dict2={"A":1,"B":2,"C":3},{"D":4,"E":5}
+d={}
+for x,y in zip_longest(dict1, dict2, fillvalue=None):
+    if x ==None or y==None:
+        pass
+    else:
+        print(dict1[x])
+        print(dict2[y])

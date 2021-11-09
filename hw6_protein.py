@@ -150,6 +150,7 @@ def combineProteins(proteinList):
     for i in proteinList:
         for word in i:
             _list.append(word)
+    print(_list)
     return _list
 
 
@@ -163,9 +164,23 @@ def aminoAcidDictionary(aaList):
     result={}
     for x in aaList:
         if x not in result:
-            result[x]=0
-        result[x]+=1
+            result[x]=1
+        else:
+            result[x]+=1
     return result
+
+    '''
+    we can write this function in this way too
+    def aminoAcidDictionary(aaList):
+    result={}
+    for x in aaList:
+        if x not in result:
+            result[x]=1
+        else:
+            result[x]+=1
+    return result
+
+    '''
 
 
 '''
@@ -174,8 +189,60 @@ findAminoAcidDifferences(proteinList1, proteinList2, cutoff)
 Parameters: 2D list of strs ; 2D list of strs ; float
 Returns: 2D list of values
 '''
+from itertools import zip_longest
 def findAminoAcidDifferences(proteinList1, proteinList2, cutoff):
-    return
+    combine1,combine2 = combineProteins(proteinList1), combineProteins(proteinList2) #returns 1d list
+    dict1,dict2 = aminoAcidDictionary(combine1),aminoAcidDictionary(combine2) #returns dictinory
+    temp,result=[],[]             #holds acids,#final result list
+    freq_dict1,freq_dict2={},{}   #proteinList1,#proteindict2   
+    for i in dict1:
+        freq_dict1[i] = dict1[i]/len(combine1)
+        if i not in temp and i !="Start" and i!="Stop":
+            temp.append(i)
+    for a in dict2:
+        freq_dict2[a] = dict2[a]/len(combine2)
+        if a not in temp and a !="Start" and a!="Stop":
+            temp.append(a)
+    print(freq_dict1,len(freq_dict1),"f1")
+    print(freq_dict2,len(freq_dict2),"f2")
+    for ac in temp:
+        freq1,freq2=0,0
+        if ac in freq_dict1:
+            freq1= freq_dict1[ac]
+        if ac in freq_dict2:
+            freq2= freq_dict2[ac]
+        difference = freq2-freq1
+        if difference < -cutoff or difference > cutoff  :
+            result.append([ac , freq1, freq2])
+    return result
+    '''
+    using the zip method I am itreating two dict at same time so for another dict 
+    control variables are x1,y1, need to work on below code
+    '''
+    # for x,x1 in zip_longest(dict1, dict2):
+    #     if x ==None or x1==None:
+    #         pass
+    #     else:
+    #         freq_dict1[x] = dict1[x]/len(combine1)
+    #         freq_dict2[x1] = dict2[x1]/len(combine2)
+    #         if x not in temp and x!= "Start" and x!="Stop":
+    #             temp.append(x)
+    #         if x1 not in temp and x1!="Start" and x1!="Stop":
+    #             temp.append(x1)
+    # print(freq_dict1,len(freq_dict1),"f1")
+    # print(freq_dict2,len(freq_dict2),"f2")
+    # for acid in temp:
+    #     freq1=0
+    #     freq2=0
+    #     if acid in freq_dict1:
+    #         freq1 = freq_dict1[acid]
+    #     if acid in freq_dict2:
+    #         freq2= freq_dict2[acid]
+    #     difference= freq2-freq1
+    #     if difference > cutoff or difference < -cutoff:
+    #         result.append([acid,freq1,freq2])
+    # print(result,len(result))
+    # return result
 
 
 '''
@@ -281,4 +348,7 @@ if __name__ == "__main__":
     # test.testSynthesizeProteins()
     # test.testCommonProteins()
     # test.testCommonProteins()
-    test.testAminoAcidDictionary()
+    # test.testAminoAcidDictionary()    
+    test.testFindAminoAcidDifferences()
+    # test.testCombineProteins()
+    
