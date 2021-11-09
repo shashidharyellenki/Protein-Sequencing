@@ -30,7 +30,7 @@ for i in open_:
     string+=i
 return string
 '''
-# print(readFile("data/human_p53.txt"))
+
 
 '''
 dnaToRna(dna, startIndex)
@@ -150,7 +150,7 @@ def combineProteins(proteinList):
     for i in proteinList:
         for word in i:
             _list.append(word)
-    print(_list)
+    # print(_list)
     return _list
 
 
@@ -189,7 +189,7 @@ findAminoAcidDifferences(proteinList1, proteinList2, cutoff)
 Parameters: 2D list of strs ; 2D list of strs ; float
 Returns: 2D list of values
 '''
-from itertools import zip_longest
+# from itertools import zip_longest
 def findAminoAcidDifferences(proteinList1, proteinList2, cutoff):
     combine1,combine2 = combineProteins(proteinList1), combineProteins(proteinList2) #returns 1d list
     dict1,dict2 = aminoAcidDictionary(combine1),aminoAcidDictionary(combine2) #returns dictinory
@@ -203,8 +203,8 @@ def findAminoAcidDifferences(proteinList1, proteinList2, cutoff):
         freq_dict2[a] = dict2[a]/len(combine2)
         if a not in temp and a !="Start" and a!="Stop":
             temp.append(a)
-    print(freq_dict1,len(freq_dict1),"f1")
-    print(freq_dict2,len(freq_dict2),"f2")
+    # print(freq_dict1,len(freq_dict1),"f1")
+    # print(freq_dict2,len(freq_dict2),"f2")
     for ac in temp:
         freq1,freq2=0,0
         if ac in freq_dict1:
@@ -252,6 +252,28 @@ Parameters: 2D list of strs ; 2D list of values
 Returns: None
 '''
 def displayTextResults(commonalities, differences):
+    print("Printing the Commnalities!")
+    for i in sorted(commonalities):
+        commonProteins = ""
+        let = i[1:len(i)-1] # to remove start and stop [start, ser, pro, leu,stop]
+        count=0
+        for j in let:
+            commonProteins+=j   #ser,pro,leu
+            count+=1            #1,2,3
+            if count !=len(let): #not equal
+                commonProteins+="-" #ser-pro-leu
+        print(commonProteins)
+        '''
+        for i in commonalities:
+            if i =="Start" or i =="Stop":
+                pass
+            else:
+                print(i)
+        '''
+
+    print("Printing DNA sequences!")
+    for item in differences:
+        print(item[0],":",round(item[1]*100,2),"% in seq1,",round(item[2]*100,2),"% in seq2")
     return
 
 
@@ -349,6 +371,6 @@ if __name__ == "__main__":
     # test.testCommonProteins()
     # test.testCommonProteins()
     # test.testAminoAcidDictionary()    
-    test.testFindAminoAcidDifferences()
+    # test.testFindAminoAcidDifferences()
     # test.testCombineProteins()
-    
+    test.runWeek2()
