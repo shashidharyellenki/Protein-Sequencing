@@ -294,8 +294,16 @@ makeAminoAcidLabels(proteinList1, proteinList2)
 Parameters: 2D list of strs ; 2D list of strs
 Returns: list of strs
 '''
+from itertools import zip_longest
 def makeAminoAcidLabels(proteinList1, proteinList2):
-    return
+    combineProteins_list1,combineProteins_list2=combineProteins(proteinList1),combineProteins(proteinList2)
+    final_list=[]
+    for x,y in zip_longest(combineProteins_list1,combineProteins_list2):
+        if  x not in final_list and x!=None:
+            final_list.append(x)
+        if y not in final_list and y!=None:
+            final_list.append(y)
+    return sorted(final_list)
 
 
 '''
@@ -373,4 +381,5 @@ if __name__ == "__main__":
     # test.testAminoAcidDictionary()    
     # test.testFindAminoAcidDifferences()
     # test.testCombineProteins()
-    test.runWeek2()
+    # test.runWeek2()
+    test.testMakeAminoAcidLabels()
