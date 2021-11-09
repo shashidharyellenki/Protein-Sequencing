@@ -336,8 +336,8 @@ def createChart(xLabels, freqList1, label1, freqList2, label2, edgeList=None):
     import matplotlib.pyplot as plt
     w = 0.35  # the width of the bars
     xvalues=np.arange(len(xLabels))
-    plt.bar(xvalues, freqList1, width=-w, align='edge', label=label1)
-    plt.bar(xvalues, freqList2, width= w, align='edge', label=label2)
+    plt.bar(xvalues, freqList1, width=-w, align='edge', label=label1, edgecolor=edgeList)
+    plt.bar(xvalues, freqList2, width= w, align='edge', label=label2,edgecolor=edgeList)
 
     plt.xticks(rotation="vertical")
     plt.legend()
@@ -355,7 +355,17 @@ Parameters: list of strs ; 2D list of values
 Returns: list of strs
 '''
 def makeEdgeList(labels, biggestDiffs):
-    return
+    print(biggestDiffs[0])
+    black=[]
+    first_item=[]
+    for row in biggestDiffs:
+        first_item.append(row[0])
+    for row in labels:
+        if row in first_item:
+            black.append("black")
+        else:
+            black.append("white")
+    return black
 
 
 '''
@@ -405,4 +415,5 @@ if __name__ == "__main__":
     # test.runWeek2()
     # test.testMakeAminoAcidLabels()
     # test.testSetupChartData()
-    test.testCreateChart()
+    # test.testCreateChart()
+    test.testMakeEdgeList()
