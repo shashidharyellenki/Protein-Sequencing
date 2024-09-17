@@ -4,6 +4,7 @@ Name:
 Roll Number:
 """
 
+from os import read
 import hw6_protein_tests as test
 
 project = "Protein" # don't edit this
@@ -17,8 +18,19 @@ Parameters: str
 Returns: str
 '''
 def readFile(filename):
-    return
+   open_=open(filename,"r").read().splitlines()
+   string="".join(open_)
+   return string  
 
+'''
+other way of writing the above funciton
+open_ = open(filname,"r").read.splitlines()
+string=""
+for i in open_:
+    string+=i
+return string
+'''
+# print(readFile("data/human_p53.txt"))
 
 '''
 dnaToRna(dna, startIndex)
@@ -27,7 +39,22 @@ Parameters: str ; int
 Returns: list of strs
 '''
 def dnaToRna(dna, startIndex):
-    return
+    res=dna[startIndex:]
+    list_=[]
+    string=""#atgaug
+    ignore=["UAG", "UAA","UGA"]
+    for letter in range(len(res)):
+        if len(string)!=3:
+            string+=res[letter]
+        if len(string)==3:
+            x= string.replace("T","U")
+            if x in ignore:
+                list_.append(x)
+                return list_
+            else:
+                list_.append(x)
+                string=""
+    return list_
 
 
 '''
@@ -38,7 +65,13 @@ Returns: dict mapping strs to strs
 '''
 def makeCodonDictionary(filename):
     import json
-    return
+    f = open(filename)
+    read = json.load(f)
+    d={}
+    for x,y in read.items():
+        for i in y:
+            d[i.replace('T','U')]=x
+    return d
 
 
 '''
@@ -48,7 +81,13 @@ Parameters: list of strs ; dict mapping strs to strs
 Returns: list of strs
 '''
 def generateProtein(codons, codonD):
-    return
+    list_=[]
+    if codons[0] =="AUG":
+        list_.append("Start")
+    for i in range(1,len(codons)):
+        if codons[i] in codonD.keys():
+            list_.append(codonD[codons[i]])
+    return list_
 
 
 '''
@@ -58,7 +97,8 @@ Parameters: str ; str
 Returns: 2D list of strs
 '''
 def synthesizeProteins(dnaFilename, codonFilename):
-    return
+  
+    return 
 
 
 def runWeek1():
@@ -186,10 +226,10 @@ def runFullProgram():
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
-    test.week1Tests()
-    print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
-    runWeek1()
+    # print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
+    # test.week1Tests()
+    # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
+    # runWeek1()
 
     ## Uncomment these for Week 2 ##
     """
@@ -206,3 +246,8 @@ if __name__ == "__main__":
     print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
     runFullProgram()
     """
+    # test.testReadFile()
+    # test.testDnaToRna()4
+    # test.testMakeCodonDictionary()
+    # test.testGenerateProtein()
+    test.testSynthesizeProteins()
